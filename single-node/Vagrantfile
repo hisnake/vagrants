@@ -1,0 +1,17 @@
+
+
+Vagrant.configure("2") do |config|
+    config.vm.define "ubuntu2004" do |server|
+        server.vm.box = "roboxes/ubuntu2004"
+        server.vm.box_check_update = false
+        server.vm.hostname = "ubuntu2004.local"
+        server.vm.network "forwarded_port", guest:80, host:8080
+        server.vm.network "private_network", ip: "192.168.33.10"
+        
+        server.vm.provider :virtualbox do |vbox|
+          vbox.name = "ubuntu2004"
+          vbox.memory = 1024
+          vbox.cpus = 1
+        end
+    end
+end
